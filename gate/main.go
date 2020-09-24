@@ -3,6 +3,7 @@ package main
 import (
 	"demo/gotcp/network"
 	"log"
+	"time"
 )
 
 var (
@@ -19,7 +20,7 @@ func runLoginProxy(host, port string) {
 			log.Println("error:", err)
 		}
 	})
-	err := loginProxy.Connect(host, port)
+	err := loginProxy.Connect(host, port, time.Second*15)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -34,7 +35,7 @@ func runGameProxy(host, port string) {
 			log.Println("error:", err)
 		}
 	})
-	err := gameProxy.Connect(host, port)
+	err := gameProxy.Connect(host, port, time.Second*15)
 	if err != nil {
 		log.Fatal(err)
 	}

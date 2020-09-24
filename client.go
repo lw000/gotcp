@@ -5,6 +5,7 @@ import (
 	"demo/gotcp/protos/msg"
 	"github.com/gogo/protobuf/proto"
 	"log"
+	"time"
 )
 
 func RunClient2(host, port string) {
@@ -31,7 +32,7 @@ func RunClient2(host, port string) {
 		}
 
 	})
-	err := client.Connect(host, port)
+	err := client.Connect(host, port, time.Second*15)
 	if err != nil {
 		log.Fatal(err)
 	}

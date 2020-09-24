@@ -2,6 +2,7 @@ package network
 
 import (
 	"net"
+	"time"
 )
 
 type TCPClient struct {
@@ -18,8 +19,8 @@ func (c *TCPClient) SetMessageHandler(fn MessageHandler) {
 	c.session.onHandler = fn
 }
 
-func (c *TCPClient) Connect(host, port string) error {
-	conn, err := net.Dial("tcp4", net.JoinHostPort(host, port))
+func (c *TCPClient) Connect(host, port string, timeout time.Duration) error {
+	conn, err := net.DialTimeout("tcp4", net.JoinHostPort(host, port), timeout)
 	if err != nil {
 		return err
 	}
