@@ -1,6 +1,7 @@
 package main
 
 import (
+	"go.uber.org/atomic"
 	"log"
 	"reflect"
 	"regexp"
@@ -55,9 +56,18 @@ func validate(v interface{}) (bool, string) {
 }
 
 func main() {
-	var a = T{Age: 10, Nested: Nested{Email: "abc@abc.com"}}
-	validateResult, errmsg := validate(a)
-	log.Println(validateResult, errmsg)
+	{
+		var a = T{Age: 10, Nested: Nested{Email: "abc@abc.com"}}
+		validateResult, errmsg := validate(a)
+		log.Println(validateResult, errmsg)
+	}
+
+	{
+		var v atomic.Int32
+		v.Store(1)
+		v.Sub(2)
+		log.Println(v)
+	}
 
 	// serve := network.TCPService{}
 	// serve.SetMessageHandler(func(session *network.Session, msg *network.Message) {
